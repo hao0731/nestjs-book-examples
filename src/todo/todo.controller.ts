@@ -7,14 +7,14 @@ export class TodoController {
     return [];
   }
 
-  @Get('/examples')
+  @Get('exam*ples')
   getExamples() {
     return [
       {
         id: 1,
         title: 'Example 1',
         description: '',
-      },
+      }
     ];
   }
 }
