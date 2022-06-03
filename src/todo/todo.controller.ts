@@ -1,20 +1,23 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Param } from '@nestjs/common';
 
 @Controller('todos')
 export class TodoController {
-  @Get()
-  getAll() {
-    return [];
+  @Get(':id')
+  getTodo(@Param() params: { id: string }) {
+    const { id } = params;
+    return {
+      id,
+      title: `Title ${id}`,
+      description: '',
+    };
   }
 
-  @Get('exam*ples')
-  getExamples() {
-    return [
-      {
-        id: 1,
-        title: 'Example 1',
-        description: '',
-      }
-    ];
-  }
+  // @Get(':id')
+  // getTodo(@Param('id') id: string) {
+  //   return {
+  //     id,
+  //     title: `Title ${id}`,
+  //     description: '',
+  //   };
+  // }
 }
