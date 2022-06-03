@@ -1,17 +1,11 @@
-import { Controller, Post, Body } from '@nestjs/common';
+import { Body, Controller, Post } from '@nestjs/common';
+import { CreateTodoDto } from './dto/create-todo.dto';
 
 @Controller('todos')
 export class TodoController {
   @Post()
-  createTodo(@Body() data: { title: string; description?: string }) {
-    return data;
+  createTodo(@Body() dto: CreateTodoDto) {
+    const id = 1;
+    return { id, ...dto };
   }
-
-  // @Post()
-  // createTodo(
-  //   @Body('title') title: string,
-  //   @Body('description') description: string,
-  // ) {
-  //   return { title, description };
-  // }
 }
