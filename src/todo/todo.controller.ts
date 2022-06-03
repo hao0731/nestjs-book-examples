@@ -1,10 +1,10 @@
-import { Controller, HttpCode, HttpStatus, Patch } from '@nestjs/common';
+import { Controller, Header, Get } from '@nestjs/common';
 
 @Controller('todos')
 export class TodoController {
-  @Patch()
-  @HttpCode(HttpStatus.NO_CONTENT)
-  updateTodo() {
+  @Get()
+  @Header('X-Hao-headers', '1')
+  getTodos() {
     return [];
   }
 }
