@@ -1,14 +1,17 @@
-import { Controller, Get, Query } from '@nestjs/common';
+import { Controller, Post, Body } from '@nestjs/common';
 
 @Controller('todos')
 export class TodoController {
-  @Get()
-  getQuery(@Query() query: { limit: string; skip: string }) {
-    return query;
+  @Post()
+  createTodo(@Body() data: { title: string; description?: string }) {
+    return data;
   }
 
-  // @Get()
-  // getQuery(@Query('limit') limit: string, @Query('skip') skip: string) {
-  //   return { limit, skip };
+  // @Post()
+  // createTodo(
+  //   @Body('title') title: string,
+  //   @Body('description') description: string,
+  // ) {
+  //   return { title, description };
   // }
 }
