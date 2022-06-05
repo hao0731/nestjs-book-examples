@@ -1,26 +1,15 @@
-import { Controller, Get, Inject } from '@nestjs/common';
-import { MessageBox } from './app.module';
+import { Controller, Get, Inject, Optional } from '@nestjs/common';
 import { AppService } from './app.service';
 
 @Controller()
 export class AppController {
   constructor(
     private readonly appService: AppService,
-    @Inject('AUTHOR_NAME') private readonly author: string,
-    @Inject('MESSAGE_BOX') private readonly messageBox: MessageBox,
-    @Inject('ALIAS_APP_SERVICE') private readonly aliasAppService: AppService,
+    @Optional()
     @Inject('HANDSOME_MAN')
-    private readonly handsomeMan: Record<string, string>,
+    private readonly handsomeMan: Record<string, string> = { name: '' },
   ) {
-    console.log('Class Provider: ', this.appService);
-    console.log('Value Provider: ', this.author);
-    console.log('Factory Provider: ', this.messageBox);
-    console.log('Alias Provider: ', this.aliasAppService);
-    console.log(
-      'Is Alias Provider the same as AppService?',
-      this.aliasAppService === this.appService,
-    );
-    console.log('Export Custom Provider: ', this.handsomeMan);
+    console.log('Export Custom Provider(Optional): ', this.handsomeMan);
   }
 
   @Get()
