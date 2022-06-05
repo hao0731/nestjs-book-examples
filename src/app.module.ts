@@ -1,13 +1,14 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { HandsomeModule } from './modules/handsome/handsome.module';
 
 export class MessageBox {
   constructor(public readonly message: string) {}
 }
 
 @Module({
-  imports: [],
+  imports: [HandsomeModule],
   controllers: [AppController],
   providers: [
     // AppService,
