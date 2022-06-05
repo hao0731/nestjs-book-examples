@@ -21,6 +21,7 @@ export class MessageBox {
       },
       inject: [AppService],
     },
+    { provide: 'ALIAS_APP_SERVICE', useExisting: AppService },
   ],
 })
 export class AppModule {}
