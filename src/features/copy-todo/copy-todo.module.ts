@@ -1,4 +1,7 @@
 import { Module } from '@nestjs/common';
+import { CopyTodoController } from './copy-todo.controller';
 
-@Module({})
+@Module({
+  controllers: [CopyTodoController]
+})
 export class CopyTodoModule {}
