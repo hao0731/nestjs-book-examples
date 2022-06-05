@@ -8,6 +8,7 @@ import { AppService } from './app.service';
   providers: [
     // AppService,
     { provide: AppService, useClass: AppService },
+    { provide: 'AUTHOR_NAME', useValue: 'HAO' },
   ],
 })
 export class AppModule {}
