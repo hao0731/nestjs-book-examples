@@ -1,4 +1,4 @@
-import { Controller, Get, HttpException, HttpStatus } from '@nestjs/common';
+import { BadRequestException, Controller, Get } from '@nestjs/common';
 import { AppService } from './app.service';
 
 @Controller()
@@ -7,11 +7,10 @@ export class AppController {
 
   @Get()
   getHello(): string {
-    const status = HttpStatus.BAD_REQUEST;
     const message = '出錯囉！';
-    // 將 HttpException 第一個參數換成 override 即可覆蓋預設格式
-    const override = { code: status, msg: message };
-    throw new HttpException(message, status);
+    // 將 BadRequestException 的參數換成 override 即可覆蓋預設格式
+    const override = { msg: message };
+    throw new BadRequestException(override);
     return this.appService.getHello();
   }
 }
