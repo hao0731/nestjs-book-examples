@@ -1,11 +1,6 @@
-import {
-  Controller,
-  Get,
-  NotAcceptableException,
-  Param,
-  ParseIntPipe,
-} from '@nestjs/common';
+import { Controller, Get, Param } from '@nestjs/common';
 import { AppService } from './app.service';
+import { ParseIntPipe } from './pipes/parse-int.pipe';
 
 @Controller()
 export class AppController {
@@ -13,14 +8,7 @@ export class AppController {
 
   @Get(':id')
   getUser(
-    @Param(
-      'id',
-      new ParseIntPipe({
-        exceptionFactory: () => {
-          return new NotAcceptableException('無法解析為數字');
-        },
-      }),
-    )
+    @Param('id', ParseIntPipe)
     id: number,
   ) {
     return this.appService.getUser(id);
