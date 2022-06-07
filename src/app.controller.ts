@@ -1,5 +1,6 @@
-import { BadRequestException, Controller, Get } from '@nestjs/common';
+import { Controller, Get } from '@nestjs/common';
 import { AppService } from './app.service';
+import { CustomException } from './exceptions/custom.exception';
 
 @Controller()
 export class AppController {
@@ -7,10 +8,7 @@ export class AppController {
 
   @Get()
   getHello(): string {
-    const message = '出錯囉！';
-    // 將 BadRequestException 的參數換成 override 即可覆蓋預設格式
-    const override = { msg: message };
-    throw new BadRequestException(override);
+    throw new CustomException();
     return this.appService.getHello();
   }
 }
