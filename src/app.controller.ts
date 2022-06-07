@@ -1,7 +1,7 @@
 import {
   Controller,
   Get,
-  HttpStatus,
+  NotAcceptableException,
   Param,
   ParseIntPipe,
 } from '@nestjs/common';
@@ -15,7 +15,11 @@ export class AppController {
   getUser(
     @Param(
       'id',
-      new ParseIntPipe({ errorHttpStatusCode: HttpStatus.NOT_ACCEPTABLE }),
+      new ParseIntPipe({
+        exceptionFactory: () => {
+          return new NotAcceptableException('無法解析為數字');
+        },
+      }),
     )
     id: number,
   ) {
