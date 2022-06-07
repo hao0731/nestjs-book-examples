@@ -1,8 +1,6 @@
 import {
   Body,
   Controller,
-  HttpStatus,
-  NotAcceptableException,
   Post,
   UsePipes,
   ValidationPipe,
@@ -13,14 +11,8 @@ import { CreateTodoDto } from './dto/create-todo.dto';
 export class TodoController {
   @Post()
   @UsePipes(
-    new ValidationPipe({
-      exceptionFactory: () => {
-        return new NotAcceptableException({
-          code: HttpStatus.NOT_ACCEPTABLE,
-          message: '格式錯誤',
-        });
-      },
-    }),
+    // new ValidationPipe({ whitelist: true })
+    new ValidationPipe({ whitelist: true, forbidNonWhitelisted: true }),
   )
   createTodo(@Body() dto: CreateTodoDto) {
     return { id: 1, ...dto };
