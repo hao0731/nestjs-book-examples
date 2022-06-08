@@ -1,4 +1,11 @@
-import { OmitType } from '@nestjs/mapped-types';
+import { IntersectionType } from '@nestjs/mapped-types';
+import { IsNotEmpty, IsString } from 'class-validator';
 import { CreateTodoDto } from './create-todo.dto';
 
-export class UpdateTodoDto extends OmitType(CreateTodoDto, ['title']) {}
+export class MockDto {
+  @IsString()
+  @IsNotEmpty()
+  public readonly information: string;
+}
+
+export class UpdateTodoDto extends IntersectionType(CreateTodoDto, MockDto) {}
