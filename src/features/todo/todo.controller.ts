@@ -1,28 +1,18 @@
 import {
   Body,
   Controller,
-  Get,
-  ParseArrayPipe,
-  Post,
-  Query,
+  Param,
+  Patch,
+  UsePipes,
+  ValidationPipe,
 } from '@nestjs/common';
-import { CreateTodoDto } from './dto/create-todo.dto';
+import { UpdateTodoDto } from './dto/update-todo.dto';
 
 @Controller('todos')
 export class TodoController {
-  @Post()
-  createTodo(
-    @Body(new ParseArrayPipe({ items: CreateTodoDto }))
-    dtos: CreateTodoDto[],
-  ) {
-    return dtos;
-  }
-
-  @Get()
-  getTodos(
-    @Query('ids', new ParseArrayPipe({ items: Number, separator: ',' }))
-    ids: number[],
-  ) {
-    return ids;
+  @Patch(':id')
+  @UsePipes(ValidationPipe)
+  updateTodo(@Param('id') id: number, @Body() dto: UpdateTodoDto) {
+    return { id, ...dto };
   }
 }
