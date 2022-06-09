@@ -6,6 +6,7 @@ import {
 } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { TodoController } from './features/todo/todo.controller';
 import { TodoModule } from './features/todo/todo.module';
 import { LoggerMiddleware } from './middlewares/logger.middleware';
 
@@ -18,9 +19,7 @@ export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
     consumer
       .apply(LoggerMiddleware)
-      .forRoutes(
-        { path: '/todos', method: RequestMethod.POST },
-        { path: '/', method: RequestMethod.GET },
-      );
+      .exclude({ path: '/todos', method: RequestMethod.GET })
+      .forRoutes(TodoController);
   }
 }
