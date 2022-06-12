@@ -1,11 +1,12 @@
 import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common';
-import { Observable } from 'rxjs';
+import { map, Observable, timer } from 'rxjs';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
   canActivate(
     context: ExecutionContext,
   ): boolean | Promise<boolean> | Observable<boolean> {
-    return true;
+    // 兩秒後回傳 false
+    return timer(2000).pipe(map(() => false));
   }
 }
