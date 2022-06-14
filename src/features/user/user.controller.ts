@@ -1,4 +1,9 @@
-import { Controller } from '@nestjs/common';
+import { Controller, Scope } from '@nestjs/common';
+import { LoggerService } from '../../modules/logger/logger.service';
 
-@Controller('users')
-export class UserController {}
+@Controller({ scope: Scope.DEFAULT, path: 'users' })
+export class UserController {
+  constructor(private readonly loggerService: LoggerService) {
+    console.log(`${UserController.name}: ${Math.random()}`);
+  }
+}
