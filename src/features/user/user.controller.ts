@@ -2,7 +2,7 @@ import { Controller, Get, Scope } from '@nestjs/common';
 import { LoggerService } from '../../modules/logger/logger.service';
 import { UserService } from './user.service';
 
-@Controller({ scope: Scope.REQUEST, path: 'users' })
+@Controller({ scope: Scope.DEFAULT, path: 'users' })
 export class UserController {
   constructor(
     private readonly loggerService: LoggerService,

@@ -2,7 +2,7 @@ import { Controller, Get, Scope } from '@nestjs/common';
 import { LoggerService } from '../../modules/logger/logger.service';
 import { TodoService } from './todo.service';
 
-@Controller({ scope: Scope.REQUEST, path: 'todos' })
+@Controller({ scope: Scope.DEFAULT, path: 'todos' })
 export class TodoController {
   constructor(
     private readonly loggerService: LoggerService,
