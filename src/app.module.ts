@@ -1,12 +1,12 @@
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { TodoModule } from './features/todo/todo.module';
-import { UserModule } from './features/user/user.module';
 import { RequestLoggerMiddleware } from './middlewares/request-logger.middleware';
+import { StorageModule } from './modules/storage/storage.module';
+import { BookModule } from './features/book/book.module';
 
 @Module({
-  imports: [TodoModule, UserModule],
+  imports: [StorageModule, BookModule],
   controllers: [AppController],
   providers: [AppService],
 })
