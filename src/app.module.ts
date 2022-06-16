@@ -1,4 +1,4 @@
-import { Module, OnModuleDestroy } from '@nestjs/common';
+import { BeforeApplicationShutdown, Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 
@@ -7,8 +7,9 @@ import { AppService } from './app.service';
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule implements OnModuleDestroy {
-  onModuleDestroy() {
+export class AppModule implements BeforeApplicationShutdown {
+  beforeApplicationShutdown(signal?: string) {
+    console.log(`Signal: ${signal}`);
     console.log(`${AppModule.name}: onModuleDestroy`);
   }
 }
