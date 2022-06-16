@@ -1,4 +1,4 @@
-import { Module, OnApplicationBootstrap } from '@nestjs/common';
+import { Module, OnModuleDestroy } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 
@@ -7,8 +7,8 @@ import { AppService } from './app.service';
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule implements OnApplicationBootstrap {
-  onApplicationBootstrap() {
-    console.log(`${AppModule.name}: onApplicationBootstrap`);
+export class AppModule implements OnModuleDestroy {
+  onModuleDestroy() {
+    console.log(`${AppModule.name}: onModuleDestroy`);
   }
 }
