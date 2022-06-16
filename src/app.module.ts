@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { Module, OnModuleInit } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 
@@ -7,4 +7,8 @@ import { AppService } from './app.service';
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule implements OnModuleInit {
+  onModuleInit() {
+    console.log(`${AppModule.name}: onModuleInit`);
+  }
+}
