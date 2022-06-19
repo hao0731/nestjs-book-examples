@@ -1,23 +1,22 @@
-import { Controller, Get, OnModuleInit } from '@nestjs/common';
-import { ContextIdFactory, ModuleRef } from '@nestjs/core';
+import { Controller, Get, Inject, Scope } from '@nestjs/common';
+import { ContextIdFactory, ModuleRef, REQUEST } from '@nestjs/core';
+import { Request } from 'express';
 import { AppService } from './app.service';
 
-@Controller()
-export class AppController implements OnModuleInit {
+@Controller({ scope: Scope.REQUEST })
+export class AppController {
   private appService: AppService;
 
-  constructor(private readonly moduleRef: ModuleRef) {}
-
-  async onModuleInit() {
-    const contextId = ContextIdFactory.create();
-    this.appService = await this.moduleRef.resolve(AppService, contextId);
-    const appService = await this.moduleRef.resolve(AppService, contextId);
-    const isSame = this.appService === appService;
-    console.log(`is same: ${isSame}`);
-  }
+  constructor(
+    private readonly moduleRef: ModuleRef,
+    @Inject(REQUEST) private readonly request: Request,
+  ) {}
 
   @Get()
-  getHello(): string {
+  async getHello() {
+    const contextId = ContextIdFactory.create();
+    this.moduleRef.registerRequestByContextId(this.request, contextId);
+    this.appService = await this.moduleRef.resolve(AppService, contextId);
     return this.appService.getHello();
   }
 }
