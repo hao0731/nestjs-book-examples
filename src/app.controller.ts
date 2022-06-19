@@ -14,9 +14,12 @@ export class AppController {
 
   @Get()
   async getHello() {
-    const contextId = ContextIdFactory.create();
-    this.moduleRef.registerRequestByContextId(this.request, contextId);
+    const contextId = ContextIdFactory.getByRequest(this.request);
+    const contextId2 = ContextIdFactory.getByRequest(this.request);
     this.appService = await this.moduleRef.resolve(AppService, contextId);
+    const appService = await this.moduleRef.resolve(AppService, contextId2);
+    const isSame = this.appService === appService;
+    console.log(`is same: ${isSame}`);
     return this.appService.getHello();
   }
 }
