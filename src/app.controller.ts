@@ -1,5 +1,5 @@
 import { Controller, Get, OnModuleInit } from '@nestjs/common';
-import { ModuleRef } from '@nestjs/core';
+import { ContextIdFactory, ModuleRef } from '@nestjs/core';
 import { AppService } from './app.service';
 
 @Controller()
@@ -9,8 +9,9 @@ export class AppController implements OnModuleInit {
   constructor(private readonly moduleRef: ModuleRef) {}
 
   async onModuleInit() {
-    this.appService = await this.moduleRef.resolve(AppService);
-    const appService = await this.moduleRef.resolve(AppService);
+    const contextId = ContextIdFactory.create();
+    this.appService = await this.moduleRef.resolve(AppService, contextId);
+    const appService = await this.moduleRef.resolve(AppService, contextId);
     const isSame = this.appService === appService;
     console.log(`is same: ${isSame}`);
   }
