@@ -4,7 +4,7 @@ import { AppService } from './app.service';
 import { AuthorModule } from './modules/author/author.module';
 
 @Module({
-  imports: [AuthorModule],
+  imports: [AuthorModule.register('HAO')],
   controllers: [AppController],
   providers: [AppService],
 })
