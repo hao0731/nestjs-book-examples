@@ -7,11 +7,8 @@ export class AppController {
 
   @Get()
   getHello() {
-    /** 取出物件下特定值可以用這種方式 */
-    // const username = this.configService.get('database.username');
-
-    const database = this.configService.get('database');
-    const port = this.configService.get('port');
-    return { database, port };
+    const domain = this.configService.get('APP_DOMAIN');
+    const redirectUrl = this.configService.get('APP_REDIRECT_URL');
+    return { domain, redirectUrl };
   }
 }

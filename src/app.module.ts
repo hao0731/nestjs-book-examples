@@ -10,6 +10,7 @@ import serverConfig from './config/server.config';
     ConfigModule.forRoot({
       load: [databaseConfig, serverConfig],
       envFilePath: ['development.local.env', 'development.env'],
+      expandVariables: true,
     }),
   ],
   controllers: [AppController],
