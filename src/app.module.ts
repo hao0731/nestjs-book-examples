@@ -4,7 +4,11 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 
 @Module({
-  imports: [ConfigModule.forRoot()],
+  imports: [
+    ConfigModule.forRoot({
+      envFilePath: 'development.env',
+    }),
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
