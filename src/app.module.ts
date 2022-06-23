@@ -11,6 +11,7 @@ import serverConfig from './config/server.config';
       load: [databaseConfig, serverConfig],
       envFilePath: ['development.local.env', 'development.env'],
       expandVariables: true,
+      isGlobal: true,
     }),
   ],
   controllers: [AppController],
