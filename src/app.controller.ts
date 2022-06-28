@@ -5,10 +5,7 @@ import {
   UploadedFiles,
   UseInterceptors,
 } from '@nestjs/common';
-import {
-  FileFieldsInterceptor,
-  FileInterceptor,
-} from '@nestjs/platform-express';
+import { AnyFilesInterceptor, FileInterceptor } from '@nestjs/platform-express';
 
 @Controller()
 export class AppController {
@@ -19,15 +16,8 @@ export class AppController {
   }
 
   @Post('multiple')
-  @UseInterceptors(
-    FileFieldsInterceptor([
-      { name: 'file1', maxCount: 2 },
-      { name: 'file2', maxCount: 2 },
-    ]),
-  )
-  uploadMultipleFiles(
-    @UploadedFiles() files: Record<string, Express.Multer.File[]>,
-  ) {
+  @UseInterceptors(AnyFilesInterceptor())
+  uploadMultipleFiles(@UploadedFiles() files: Express.Multer.File[]) {
     return files;
   }
 }
