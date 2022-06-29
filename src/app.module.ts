@@ -6,13 +6,7 @@ import { AppService } from './app.service';
 @Module({
   imports: [
     MulterModule.register({
-      fileFilter: (req, file, callback) => {
-        if (file.mimetype !== 'text/markdown') {
-          callback(null, false);
-          return;
-        }
-        callback(null, true);
-      },
+      dest: './upload',
     }),
   ],
   controllers: [AppController],
