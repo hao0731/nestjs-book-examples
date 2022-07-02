@@ -4,7 +4,11 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 
 @Module({
-  imports: [HttpModule],
+  imports: [
+    HttpModule.register({
+      baseURL: 'https://jsonplaceholder.typicode.com',
+    }),
+  ],
   controllers: [AppController],
   providers: [AppService],
 })

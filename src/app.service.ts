@@ -12,9 +12,6 @@ export class AppService {
   }
 
   getTodos() {
-    const baseUrl = 'https://jsonplaceholder.typicode.com';
-    return this.httpService
-      .get<ITodo>('/todos', { baseURL: baseUrl })
-      .pipe(map(({ data }) => data));
+    return this.httpService.get<ITodo>('/todos').pipe(map(({ data }) => data));
   }
 }
