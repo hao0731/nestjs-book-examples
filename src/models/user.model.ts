@@ -1,4 +1,5 @@
 import { Prop, raw, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { isEmail } from 'class-validator';
 
 export interface IUserName {
   firstName: string;
@@ -14,6 +15,14 @@ export class User {
     }),
   )
   name: IUserName;
+
+  @Prop({
+    required: true,
+    validate: {
+      validator: (input: string) => isEmail(input),
+    },
+  })
+  email: string;
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);
