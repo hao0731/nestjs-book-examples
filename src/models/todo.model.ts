@@ -1,4 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { Types } from 'mongoose';
+import { User } from './user.model';
 
 @Schema({ timestamps: true })
 export class Todo {
@@ -13,6 +15,9 @@ export class Todo {
 
   @Prop({ type: [String] })
   tags: string[];
+
+  @Prop({ type: Types.ObjectId, ref: User.name })
+  owner: User;
 }
 
 export const TodoSchema = SchemaFactory.createForClass(Todo);
