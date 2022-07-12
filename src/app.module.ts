@@ -3,6 +3,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { UserModule } from './features/user/user.module';
 import databaseConfg from './config/database.confg';
 
 @Module({
@@ -17,6 +18,7 @@ import databaseConfg from './config/database.confg';
         uri: configService.get<string>('database.uri'),
       }),
     }),
+    UserModule,
   ],
   controllers: [AppController],
   providers: [AppService],
