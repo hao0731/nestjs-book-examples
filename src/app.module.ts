@@ -1,4 +1,5 @@
-import { Module } from '@nestjs/common';
+import { APP_PIPE } from '@nestjs/core';
+import { Module, ValidationPipe } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { AppController } from './app.controller';
@@ -21,6 +22,12 @@ import databaseConfg from './config/database.confg';
     UserModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [
+    AppService,
+    {
+      provide: APP_PIPE,
+      useClass: ValidationPipe,
+    },
+  ],
 })
 export class AppModule {}
