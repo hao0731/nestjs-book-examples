@@ -1,10 +1,13 @@
 import { Prop, raw, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { isEmail } from 'class-validator';
+import { Document } from 'mongoose';
 
 export interface IUserName {
   firstName: string;
   lastName: string;
 }
+
+export type UserDocument = Document & User;
 
 @Schema({ timestamps: true })
 export class User {
