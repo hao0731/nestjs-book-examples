@@ -15,4 +15,12 @@ export class UserService {
     const name: IUserName = { firstName, lastName };
     return this.userModel.create({ name, email });
   }
+
+  public getUsers(limit = 30, skip = 0) {
+    return this.userModel.find().skip(skip).limit(limit).exec();
+  }
+
+  public getUser(id: string) {
+    return this.userModel.findById(id).exec();
+  }
 }
