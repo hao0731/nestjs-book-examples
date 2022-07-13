@@ -1,8 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
+import { flatten } from 'flat';
 import { IUserName, User, UserDocument } from '../../models/user.model';
 import { CreateUserDto } from './dto/create-user.dto';
+import { UpdateUserDto } from './dto/update-user.dto';
 
 @Injectable()
 export class UserService {
@@ -22,5 +24,17 @@ export class UserService {
 
   public getUser(id: string) {
     return this.userModel.findById(id).exec();
+  }
+
+  public updateUser(id: string, dto: UpdateUserDto) {
+    const { firstName, lastName, email } = dto;
+    const data = {
+      email,
+      name: { firstName, lastName },
+    };
+    const obj = flatten(data);
+    return this.userModel
+      .findByIdAndUpdate(id, { $set: obj }, { new: true })
+      .exec();
   }
 }
