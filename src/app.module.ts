@@ -26,7 +26,11 @@ import databaseConfg from './config/database.confg';
     AppService,
     {
       provide: APP_PIPE,
-      useClass: ValidationPipe,
+      useFactory: () => {
+        return new ValidationPipe({
+          transform: true,
+        });
+      },
     },
   ],
 })
