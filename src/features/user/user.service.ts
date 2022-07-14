@@ -37,4 +37,8 @@ export class UserService {
       .findByIdAndUpdate(id, { $set: obj }, { new: true })
       .exec();
   }
+
+  public deleteUser(id: string) {
+    return this.userModel.findByIdAndDelete(id).exec();
+  }
 }
