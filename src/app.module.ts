@@ -7,6 +7,7 @@ import { UserModule } from './features/user/user.module';
 
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { AuthModule } from './features/auth/auth.module';
 
 import databaseConfig from './config/database.config';
 
@@ -24,6 +25,7 @@ import databaseConfig from './config/database.config';
       }),
     }),
     UserModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [
