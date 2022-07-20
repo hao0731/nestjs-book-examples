@@ -1,6 +1,15 @@
-import { BadRequestException, Body, Controller, Post } from '@nestjs/common';
+import {
+  BadRequestException,
+  Body,
+  Controller,
+  Post,
+  UseGuards,
+} from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
 import { CreateUserDto } from '../user/dto/create-user.dto';
 import { UserService } from '../user/user.service';
+import { UserPayload } from './decorators/user-payload.decorator';
+import { IUserPayload } from './models/payload.model';
 
 @Controller('auth')
 export class AuthController {
@@ -17,5 +26,11 @@ export class AuthController {
     }
 
     return this.userService.createUser(dto);
+  }
+
+  @UseGuards(AuthGuard('local'))
+  @Post('signin')
+  signin(@UserPayload() user: IUserPayload) {
+    return user;
   }
 }
