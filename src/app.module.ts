@@ -10,12 +10,13 @@ import { AppService } from './app.service';
 import { AuthModule } from './features/auth/auth.module';
 
 import databaseConfig from './config/database.config';
+import secretConfig from './config/secret.config';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
-      load: [databaseConfig],
+      load: [databaseConfig, secretConfig],
     }),
     MongooseModule.forRootAsync({
       imports: [ConfigModule],

@@ -5,6 +5,7 @@ import {
   Post,
   UseGuards,
 } from '@nestjs/common';
+import { JwtService } from '@nestjs/jwt';
 import { AuthGuard } from '@nestjs/passport';
 import { CreateUserDto } from '../user/dto/create-user.dto';
 import { UserService } from '../user/user.service';
@@ -13,7 +14,10 @@ import { IUserPayload } from './models/payload.model';
 
 @Controller('auth')
 export class AuthController {
-  constructor(private readonly userService: UserService) {}
+  constructor(
+    private readonly jwtService: JwtService,
+    private readonly userService: UserService,
+  ) {}
 
   @Post('signup')
   async signup(@Body() dto: CreateUserDto) {
@@ -25,12 +29,18 @@ export class AuthController {
       throw new BadRequestException(message);
     }
 
-    return this.userService.createUser(dto);
+    const user = await this.userService.createUser(dto);
+    const payload: IUserPayload = {
+      id: user._id,
+      username: user.username,
+    };
+
+    return this.jwtService.sign(payload);
   }
 
   @UseGuards(AuthGuard('local'))
   @Post('signin')
   signin(@UserPayload() user: IUserPayload) {
-    return user;
+    return this.jwtService.sign(user);
   }
 }
