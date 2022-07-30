@@ -15,10 +15,11 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
   }
 
   validate(payload: Record<string, any>) {
-    const { id, username } = payload;
+    const { id, username, role } = payload;
     const userPayload: IUserPayload = {
       id,
       username,
+      role,
     };
     return userPayload;
   }

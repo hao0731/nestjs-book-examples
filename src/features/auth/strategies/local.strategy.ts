@@ -20,6 +20,7 @@ export class LocalStrategy extends PassportStrategy(Strategy) {
     const payload: IUserPayload = {
       id: user._id,
       username: user.username,
+      role: user.role,
     };
 
     return payload;
