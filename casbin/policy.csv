@@ -1,0 +1,8 @@
+p, admin, /todos, *
+p, admin, /todos/:id, *
+p, staff, /todos, read
+p, staff, /todos/:id, read
+p, manager, /todos, create
+p, manager, /todos/:id, update
+
+g, manager, staff
