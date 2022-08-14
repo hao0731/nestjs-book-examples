@@ -6,6 +6,7 @@ import {
   MaxLength,
   MinLength,
 } from 'class-validator';
+import { TodoPriority } from '../types/todo.type';
 
 export class CreateTodoDto {
   @ApiProperty({
@@ -40,4 +41,11 @@ export class CreateTodoDto {
     description: 'Todo tags',
   })
   public readonly tags?: string[];
+
+  @ApiProperty({
+    enum: TodoPriority,
+    enumName: 'TodoPriority',
+    description: 'Todo priority',
+  })
+  public readonly priority: TodoPriority;
 }
