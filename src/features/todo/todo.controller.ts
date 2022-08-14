@@ -1,9 +1,10 @@
 import { Body, Controller, Get, Param, Patch, Post } from '@nestjs/common';
-import { ApiBody } from '@nestjs/swagger';
+import { ApiBody, ApiTags } from '@nestjs/swagger';
 import { CreateTodoDto } from './dto/create-todo.dto';
 import { UpdateTodoDto } from './dto/update-todo.dto';
 import { TodoService } from './todo.service';
 
+@ApiTags('Todo')
 @Controller('todos')
 export class TodoController {
   constructor(private readonly todoService: TodoService) {}
