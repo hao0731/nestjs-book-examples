@@ -33,4 +33,11 @@ export class CreateTodoDto {
   @ApiProperty()
   @IsBoolean()
   public readonly completed: boolean;
+
+  @ApiProperty({
+    type: [String],
+    required: false,
+    description: 'Todo tags',
+  })
+  public readonly tags?: string[];
 }

@@ -1,4 +1,5 @@
 import { Body, Controller, Get, Param, Patch, Post } from '@nestjs/common';
+import { ApiBody } from '@nestjs/swagger';
 import { CreateTodoDto } from './dto/create-todo.dto';
 import { UpdateTodoDto } from './dto/update-todo.dto';
 import { TodoService } from './todo.service';
@@ -15,6 +16,12 @@ export class TodoController {
   @Post()
   createTodo(@Body() dto: CreateTodoDto) {
     return this.todoService.createTodo(dto);
+  }
+
+  @ApiBody({ type: [CreateTodoDto] })
+  @Post('bulk')
+  createTodos(@Body() dtos: CreateTodoDto[]) {
+    return dtos.map((dto) => this.todoService.createTodo(dto));
   }
 
   @Patch(':id')
