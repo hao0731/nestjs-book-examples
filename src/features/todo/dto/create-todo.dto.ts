@@ -48,4 +48,16 @@ export class CreateTodoDto {
     description: 'Todo priority',
   })
   public readonly priority: TodoPriority;
+
+  @ApiProperty({
+    type: 'array',
+    items: {
+      type: 'array',
+      items: {
+        type: 'string',
+      },
+    },
+    required: false,
+  })
+  public readonly something?: string[][];
 }

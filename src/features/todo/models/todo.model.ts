@@ -7,4 +7,5 @@ export interface ITodo {
   completed: boolean;
   tags?: string[];
   priority: TodoPriority;
+  something?: string[][];
 }
