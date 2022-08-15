@@ -1,5 +1,13 @@
-import { Body, Controller, Get, Param, Patch, Post } from '@nestjs/common';
-import { ApiBody, ApiHeader, ApiTags } from '@nestjs/swagger';
+import {
+  Body,
+  Controller,
+  Get,
+  HttpStatus,
+  Param,
+  Patch,
+  Post,
+} from '@nestjs/common';
+import { ApiBody, ApiHeader, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { CreateTodoDto } from './dto/create-todo.dto';
 import { UpdateTodoDto } from './dto/update-todo.dto';
 import { TodoService } from './todo.service';
@@ -15,6 +23,10 @@ export class TodoController {
     return this.todoService.getTodo(id);
   }
 
+  @ApiResponse({
+    status: HttpStatus.CREATED,
+    description: 'The todo has been successfully created.',
+  })
   @Post()
   createTodo(@Body() dto: CreateTodoDto) {
     return this.todoService.createTodo(dto);
