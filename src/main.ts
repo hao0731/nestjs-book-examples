@@ -19,7 +19,7 @@ function setupSwagger(app: INestApplication) {
     .setTitle('TodoList')
     .setDescription('This is a basic Swagger document.')
     .setVersion('1.0')
-    .addBasicAuth()
+    .addBearerAuth()
     .build();
   const document = SwaggerModule.createDocument(app, config);
   const options: SwaggerCustomOptions = {
