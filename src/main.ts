@@ -19,7 +19,21 @@ function setupSwagger(app: INestApplication) {
     .setTitle('TodoList')
     .setDescription('This is a basic Swagger document.')
     .setVersion('1.0')
-    .addBearerAuth()
+    .addOAuth2({
+      type: 'oauth2',
+      flows: {
+        implicit: {
+          authorizationUrl: '<AUTHORIZATION_URL>',
+          tokenUrl: '<TOKEN_URL>',
+          scopes: {
+            read: 'read',
+            write: 'write',
+            update: 'update',
+            delete: 'delete',
+          },
+        },
+      },
+    })
     .build();
   const document = SwaggerModule.createDocument(app, config);
   const options: SwaggerCustomOptions = {
